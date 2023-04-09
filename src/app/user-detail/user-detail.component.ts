@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, docData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { collection, doc, getDoc } from 'firebase/firestore';
@@ -32,9 +32,10 @@ export class UserDetailComponent implements OnInit {
   async getUser() {
     const user = collection(this.firestore, 'users');
     const docRef = doc(user, this.userID);
-    const docSnap = await getDoc(docRef);
-    const userData = docSnap.data();
-    this.user = new User(userData);
+
+    docData(docRef).subscribe(user => {
+      this.user = new User(user);
+    });
   }
 
   editMenu() {

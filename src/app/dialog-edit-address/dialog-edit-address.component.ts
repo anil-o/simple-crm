@@ -21,12 +21,7 @@ export class DialogEditAddressComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) { }
 
   ngOnInit(): void {
-    const user = collection(this.firestore, 'users');
-    this.users$ = collectionData(user);
-    this.users$.subscribe((changes: any) => {
-      console.log('Retrieved changes', changes);
-      console.log('User', this.user);
-    });
+    
   }
 
   closeDialog() {
